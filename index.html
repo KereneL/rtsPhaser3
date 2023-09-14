@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <link href="src/assets/jquery/jquery-ui.css" rel="stylesheet">
+  <link href="src/assets/css/gui-custom-css.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="game">
+    <div id="hover-container" tabindex="-1">
+      <p tabindex="-1" id="hover-text">Hover Dover</p>
+    </div>
+    <div id="menu-container">
+      <ul id="menu" style="display: flex; justify-content: center;">
+        <li>
+          <div><span class="ui-symbol ui-symbol-chest"></span>Orders</div>
+        </li>
+        <li>
+          <div><span class="ui-symbol ui-symbol-hammer"></span>Build</div>
+          <ul>
+            <li>
+              <div><span class="ui-symbol ui-symbol-cutlry"></span>Food</div>
+              <ul>
+                <li>
+                  <div><span class="ui-symbol ui-symbol-fishing-rod"></span>Fisherman</div>
+                </li>
+                <li>
+                  <div><span class="ui-symbol ui-symbol-sickle"></span>Farmer</div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div><span class="ui-symbol ui-symbol-axe"></span>Wood Cutter</div>
+            </li>
+            <li>
+              <div><span class="ui-symbol ui-symbol-pickaxe"></span>Stone Miner</div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div><span class="ui-symbol ui-symbol-people"></span>Population</div>
+        </li>
+        <li>
+          <div><span class="ui-symbol ui-symbol-map"></span>Minimap</div>
+        </li>
+        <li>
+          <div><span class="ui-symbol ui-symbol-scroll"></span>Quests</div>
+        </li>
+        <li>
+          <div><span class="ui-symbol ui-symbol-gear"></span>Menu</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <script type="module" src="src/main.js"></script>
+  <script src="src/assets/jquery/external/jquery.js"></script>
+  <script src="src/assets/jquery/jquery-ui.js"></script>
+  <script>
+    $("#menu").menu();
+    $('#menu').menu({
+      position: { my: 'left bottom', at: 'left top' },
+      blur: function () {
+        $(this).menu('option', 'position', { my: 'left bottom', at: 'left top' });
+      },
+      focus: function (e, ui) {
+        if ($('#menu').get(0) !== $(ui).get(0).item.parent().get(0)) {
+          $(this).menu('option', 'position', { my: 'left top', at: 'right top' });
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

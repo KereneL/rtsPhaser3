@@ -1,0 +1,111 @@
+@font-face {
+	font-family: customFont;
+	src: url(../css/Bookxel.otf);
+  }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#game {
+  position: relative;
+  overflow-x: visible;
+  overflow-y: visible;
+  width: min-content;
+}
+
+#menu-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 32px;
+}
+
+#menu {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#menu>li {
+  /* Menubar buttons */
+  display: flex;
+}
+
+#menu>li>ul>li {
+  /* Menubar buttons inside dropdown */
+  display: block;
+}
+
+#hover-container {
+  position: absolute;
+  bottom: 32px;
+  left: 16px;
+  width: fit-content;  
+  -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  pointer-events: none;
+
+}
+#hover-container>p{
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 24px;
+  font-family: customFont;
+}
+
+
+.ui-symbol {
+	width: 16px;
+	height: 16px;
+  position: absolute;
+  display: inline-block;
+  margin-left: -20px;
+	background-repeat: no-repeat !important;
+	background-image: url("../graphics/Minifantasy_Icons2107_ProfessionIcons.png" ) !important;
+}
+
+.ui-symbol-sickle { background-position: -16px -16px !important; } 
+.ui-symbol-axe { background-position: -16px -32px !important; } 
+.ui-symbol-pickaxe { background-position: -16px -48px !important; } 
+.ui-symbol-net { background-position: -16px -64px !important; } 
+.ui-symbol-fishing-rod { background-position: -16px -80px !important; } 
+.ui-symbol-moose-head { background-position: -16px -96px !important; } 
+.ui-symbol-hammer { background-position: -16px -112px !important; }
+
+.ui-symbol-chest { background-position: -32px -16px !important; } 
+/*.ui-symbol-cow
+.ui-symbol-wildlife
+.ui-symbol-open-book
+.ui-symbol-shield
+.ui-symbol-sword
+.ui-symbol-green-potion*/
+
+.ui-symbol-gear { background-position: -48px -16px !important; } 
+/*.ui-symbol-screen
+.ui-symbol-music
+.ui-symbol-sounds
+.ui-symbol-load
+.ui-symbol-save*/
+.ui-symbol-map { background-position: -48px -112px !important; } 
+
+/*.ui-symbol-big-red-potion
+.ui-symbol-smiths-hammer
+.ui-symbol-thread-and-needle
+.ui-symbol-saw*/
+.ui-symbol-cutlry { background-position: -64px -96px !important; } 
+/*.ui-symbol-pink-drop
+
+.ui-symbol-small-red-potion
+.ui-symbol-anvil
+*/.ui-symbol-people { background-position: -80px -48px !important; } 
+.ui-symbol-scroll { background-position: -80px -64px !important; } 
+/*.ui-symbol-disc-saw
+.ui-symbol-cooking
+.ui-symbol-leather-hide
+*/
