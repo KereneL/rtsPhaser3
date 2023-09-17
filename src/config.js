@@ -27,6 +27,7 @@ const gameConfig = {
     audio: {
         disableWebAudio: false,
     },
+    fps: { forceSetTimeOut: true, target: 30 },
     scene: [FirstScene],
 };
 

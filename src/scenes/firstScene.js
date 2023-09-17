@@ -35,76 +35,92 @@ export class FirstScene extends Phaser.Scene {
     // this method triggered when scene is created. specify positioning and render
     create(data) {
         this.input.mouse.disableContextMenu();
-
+        //this.fpsText = this.add.text(5, 5, '', { font: '8px monospace' });
         this.createMap();
         this.setMapBounds();
+        this.createCursorAnims()
         this.createUnitsAnims();
         this.setCameraControls();
         this.createMarker();
         this.createSelectBox();
-        this.applyListeners();
-
-
+        
+        
         this.units.push(new Unit({
             scene: this,
             x: 35,
             y: 19,
-            key: 'human'
+            key: 'rhino',
+            speed: 120
         }))
-        this.units.push(new Unit({
-            scene: this,
-            x: 30,
-            y: 19,
-            key: 'orc'
-        }))
-        this.units.push(new Unit({
-            scene: this,
-            x: 25,
-            y: 19,
-            key: 'human'
-        }))
-        this.units.push(new Unit({
-            scene: this,
-            x: 20,
-            y: 19,
-            key: 'human'
-        }))
-        this.units.push(new Unit({
-            scene: this,
-            x: 15,
-            y: 19,
-            key: 'orc'
-        }))
+        // this.units.push(new Unit({
+        //     scene: this,
+        //     x: 30,
+        //     y: 19,
+        //     key: 'orc',
+        //     speed: 0.2
+        // }))
+        // this.units.push(new Unit({
+        //     scene: this,
+        //     x: 25,
+        //     y: 19,
+        //     key: 'human',
+        //     speed: 0.2
+        // }))
+        // this.units.push(new Unit({
+        //     scene: this,
+        //     x: 20,
+        //     y: 19,
+        //     key: 'human',
+        //     speed: 0.2
+        // }))
+        // this.units.push(new Unit({
+        //     scene: this,
+        //     x: 15,
+        //     y: 19,
+        //     key: 'orc',
+        //     speed: 0.2
+        // }))
         this.units.push(new Unit({
             scene: this,
             x: 10,
             y: 19,
-            key: 'orc'
+            key: 'cow',
+            speed: 50
         }))
-
+        
         this.isPanning = false;
         this.isSelecting = false;
         this.pointerStartPosition = new Phaser.Math.Vector2();
         this.cameraStartPosition = new Phaser.Math.Vector2();
+        this.applyListeners();
     }
     update(time, delta) {
         //— a method that gets called with every render frame (on average, 60 times per second). It’s a game loop in which redrawing, moving objects, etc. occurs.
-        //this.controls.update(delta);
+
+        //TODO: deltaTime manager :)
         this.updateMarker();
         this.units.forEach(unit => {
-            unit.update()
+            unit.update(delta)
         })
+        //this.fpsText.setText(`${this.sys.game.loop.actualFps}`).setDepth(9002)
     }
 
     // for Preload Functions
     loadGraphics() {
+        this.load.spritesheet('cursor-effects', '../src/assets/graphics/Minifantasy_GuiCursorClickEffects.png', {frameWidth: 16, frameHeight: 16});
 
+        this.loadTilesetsGraphics();
+        this.loadUnitGraphics();
+    }
+    loadTilesetsGraphics(){
         this.load.image('forgottenPlains-tiles', '../src/assets/graphics/freeAssets/Tileset/Minifantasy_ForgottenPlains_Tiles.png');
         this.load.image('forgottenPlains-props', '../src/assets/graphics/freeAssets/Props/Minifantasy_ForgottenPlains_Props.png');
         this.load.image('dungeon-tiles', '../src/assets/graphics/freeAssets/Tileset/Minifantasy_Dungeon_Tiles.png');
         this.load.image('dungeon-props', '../src/assets/graphics/freeAssets/Props/Minifantasy_Dungeon_Props.png');
 
-        this.loadUnitGraphics();
+        this.load.image('builders-tiles', '../src/assets/graphics/BuildersTileset.png');
+        this.load.image('dwarven-tiles', '../src/assets/graphics/DwarvenTileset.png');
+        this.load.image('dwarven-props', '../src/assets/graphics/DwarvenProps.png');
     }
     loadUnitGraphics() {
         for (const unitType in unitTypes) {
@@ -126,6 +142,29 @@ export class FirstScene extends Phaser.Scene {
     }
 
     // for Create Functions
+    createCursorAnims() {
+        let rows = 12
+        let sheetLength = 4;
+
+        for (let i = 0; i < rows; i++) {
+            const animKey = `cursor-effect-${i}`;
+            const frames = [];
+
+            // Push all frames in row i to frame
+            for (let fr = 0; fr < sheetLength; fr++) {
+                const frame = (i * sheetLength) + fr;
+                frames.push(frame)
+
+            }
+            // Use frame to create anim
+            this.anims.create({
+                key: animKey,
+                frames: this.anims.generateFrameNumbers('cursor-effects',{frames: frames}),
+                frameRate: 8,
+                repeat: 0,
+            });
+        }
+    }
     createUnitsAnims() {
         for (const unitType in unitTypes) {
             const unit = unitTypes[unitType];
@@ -133,7 +172,6 @@ export class FirstScene extends Phaser.Scene {
         }
     }
     createUnitAnims(unitType) {
-
         unitType.anims.forEach(anim => {
             this.createUnitAnim(unitType.baseKey, anim)
         })
@@ -175,6 +213,9 @@ export class FirstScene extends Phaser.Scene {
         tilesets.push(this.map.addTilesetImage('props-forgottenPlains', 'forgottenPlains-props'))
         tilesets.push(this.map.addTilesetImage('tiles-dungeon', 'dungeon-tiles'))
         tilesets.push(this.map.addTilesetImage('props-dungeon', 'dungeon-props'))
+        tilesets.push(this.map.addTilesetImage('tiles-dwarven', 'dwarven-tiles'))
+        tilesets.push(this.map.addTilesetImage('props-dwarven', 'dwarven-props'))
+        tilesets.push(this.map.addTilesetImage('tiles-builders', 'builders-tiles'))
 
         this.groundLayer = this.map.createLayer('ground', tilesets, 0, 0);
         this.wallsLayer = this.map.createLayer('walls', tilesets, 0, 0);
@@ -201,7 +242,7 @@ export class FirstScene extends Phaser.Scene {
 
         this.groundLayer.setDepth(0)
         this.wallsLayer.setDepth(100)
-        this.itemsLayer.setDepth(200)
+        this.itemsLayer.setDepth(100)
         this.aboveUnitLayer.setDepth(300)
         this.map.setLayer(this.groundLayer);
     }
@@ -217,16 +258,6 @@ export class FirstScene extends Phaser.Scene {
     }
     setCameraControls() {
         this.cameras.main.setZoom(2)
-        const cursors = this.input.keyboard.createCursorKeys();
-        const controlConfig = {
-            camera: this.cameras.main,
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            speed: 0.5
-        };
-        this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
     }
     createMarker() {
         this.marker = this.add.graphics();
@@ -392,17 +423,17 @@ export class FirstScene extends Phaser.Scene {
         let absWidth = Math.abs(this.selectBox.width);
         let absHeight = Math.abs(this.selectBox.height);
 
-        const geomRect = new Phaser.Geom.Rectangle(minX, minY, absWidth, absHeight)
+        const boxSelectRect = new Phaser.Geom.Rectangle(minX, minY, absWidth, absHeight)
 
         let hovered = this.units.filter(unit => {
             if (!unit.selected) {
                 unit.selectablePointerOut();
             }
-
-            let hitArea = new Phaser.Geom.Rectangle(unit.x - 4, unit.y - 4, 8, 8)
-
-            return Phaser.Geom.Rectangle.Overlaps(geomRect, hitArea)
+            
+            let hitArea = new Phaser.Geom.Rectangle(unit.x-4, unit.y-4, unit.hitRect.width, unit.hitRect.height) 
+            return Phaser.Geom.Rectangle.Overlaps(boxSelectRect, hitArea)
         })
+
         hovered.forEach(unit => {
             unit.selectablePointerOver()
         })
@@ -418,13 +449,11 @@ export class FirstScene extends Phaser.Scene {
         let absWidth = Math.abs(this.selectBox.width);
         let absHeight = Math.abs(this.selectBox.height);
         const geomRect = new Phaser.Geom.Rectangle(minX, minY, absWidth, absHeight)
-        //const geomRect = new Phaser.Geom.Rectangle(this.selectBox.x,this.selectBox.y,this.selectBox.width,this.selectBox.height)
 
         let selected = this.units.filter(unit => {
-            const unitRect = unit.getBounds();
+            const unitRect = new Phaser.Geom.Rectangle(unit.x-4, unit.y-4, unit.hitRect.width, unit.hitRect.height) 
             return Phaser.Geom.Rectangle.Overlaps(geomRect, unitRect)
         })
-
 
         this.selectBox.width = 0;
         this.selectBox.height = 0;
@@ -465,7 +494,19 @@ export class FirstScene extends Phaser.Scene {
     }
 
     //Order Units
-    selectionOrder() {
-        this.selected.forEach(unit => unit.orderMove());
+    selectionOrder(delta) {
+        this.selected.forEach(unit => unit.orderMove(delta));
+        this.cursorEffect(5)
+    }
+    cursorEffect(index){
+        const worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+        const tileXY = {x:this.map.worldToTileX(worldPoint.x), y: this.map.worldToTileY(worldPoint.y)}
+        const centerTileXY = {x: this.map.tileWidth*(tileXY.x+.5),y: this.map.tileHeight*(tileXY.y+.5)}
+        let gO =  this.add.sprite(centerTileXY.x,centerTileXY.y , 'cursor-effect-sprite')
+        gO.setDepth(9001);
+        gO.play(`cursor-effect-${index}`, false)
+        gO.once('animationcomplete', ()=>{
+            gO.destroy();
+          })
     }
 }

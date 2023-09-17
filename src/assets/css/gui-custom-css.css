@@ -43,7 +43,7 @@ body {
 #hover-container {
   position: absolute;
   bottom: 32px;
-  left: 16px;
+  left: 20px;
   width: fit-content;  
   -webkit-user-select: none;
 	-moz-user-select: none;
@@ -55,7 +55,7 @@ body {
 #hover-container>p{
   color: #ffffff;
   font-size: 24px;
-  line-height: 24px;
+  line-height: 4px;
   font-family: customFont;
 }
 
@@ -63,9 +63,10 @@ body {
 .ui-symbol {
 	width: 16px;
 	height: 16px;
-  position: absolute;
+  position: relative;
   display: inline-block;
   margin-left: -20px;
+  margin-right: 0.2em;
 	background-repeat: no-repeat !important;
 	background-image: url("../graphics/Minifantasy_Icons2107_ProfessionIcons.png" ) !important;
 }

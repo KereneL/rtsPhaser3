@@ -40,4 +40,36 @@ export const unitTypes = {
             {animKey:'die', ssKey:'die', sheetLength: 4, 'frameRate': 12, frameRate, repeat: 0, },
         ]
     },
+    cow: {
+        fileName: 'Cow',
+        baseKey: 'cow',
+        sheetFileNames: [
+            {fileName: 'Walk', ssKey: 'walk'},
+            {fileName: 'Idle', ssKey: 'idle'},
+        ],
+        frameConfig: {frameWidth: 32, frameHeight: 32},
+        anims: [
+            {animKey:'walk', ssKey:'walk', sheetLength: 4, 'frameRate': frameRate, repeat: -1, directions: fourDirections},
+            {animKey:'idle', ssKey:'idle', sheetLength: 12, 'frameRate': frameRate, repeat: 0, directions: fourDirections},
+        ]
+    },
+    rhino: {
+        fileName: 'Rhino',
+        baseKey: 'rhino',
+        sheetFileNames: [
+            {fileName: 'Walk', ssKey: 'walk'},
+            {fileName: 'Idle', ssKey: 'idle'},
+            {fileName: 'Dmg', ssKey: 'damage'},
+            {fileName: 'Attack', ssKey: 'attack'},
+            {fileName: 'Die', ssKey: 'die'}
+        ],
+        frameConfig: {frameWidth: 32, frameHeight: 32},
+        anims: [
+            {animKey:'walk', ssKey:'walk', sheetLength: 6, 'frameRate': frameRate, repeat: -1, directions: fourDirections},
+            {animKey:'idle', ssKey:'idle', sheetLength: 12, 'frameRate': frameRate, repeat: 0, directions: fourDirections},
+            {animKey:'damage', ssKey:'damage', sheetLength: 4, 'frameRate': frameRate, repeat: 0, directions: fourDirections},
+            {animKey:'attack', ssKey:'attack', sheetLength: 5, 'frameRate': frameRate, repeat: 0, directions: fourDirections},
+            {animKey:'die', ssKey:'die', sheetLength: 17, 'frameRate': 12, frameRate, repeat: 0, },
+        ]
+    },
 }
