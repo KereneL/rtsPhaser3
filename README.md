@@ -33,8 +33,7 @@ This is my attempt of creating a complex game using Phaser 3.
     - Zoning
     - Farming
 - Logistic chains
-
-![Screenshot 1](https://previews.dropbox.com/p/thumb/ACDAnAe_f5BnV-hTIWsp1OPsPjG0Rm88xXX02yIBqhEQqMf3hYn8wKVo73Nyj7y2x1sawz281aMzwcewTNncoYN3RjeQkI_8nlSDQMsLkTvSwW5zW0bE0TjfHnyjZNVVlU1U-0mMJ3pSK19R4ZEBKUDr2GTsfbyveXQDAEEf09QOrTJEJ32QpYHHRbNEyAlfAc-aqaQPrf3hAX0-fr5vxWqw-skNANDpNFYSKG5s-ft9yE-ZVReZlmLgPxPadkfweSYY7tBQo8NF8upN7BcPXTZLxg00QtJNJwmiEF7LckXMo4j2lQsc2DsFoIUalNSbPx4RhOpZ0YQ6HS4r6fM1HI0I/p.jpeg "Screenshot 1")
+- 
 ## Connections and Inspirations
 
 - [itch.io](https://itch.io)
