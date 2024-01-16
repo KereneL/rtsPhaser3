@@ -1,7 +1,12 @@
 
-# Phaser 3 and Vite RTS Game Example
+# Phaser 3 and Vite RTS Game Example {WIP} [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is my attempt of creating a complex game using Phaser 3.
+So far I've managed to:
+- Use Tiled to create the game map
+- Realised a deltaTime system to account for different clock speeds
+- Unit selection and movement
+- Terrain pathfinding
 
 ## Usage:
 - yarn
@@ -13,7 +18,6 @@ This is my attempt of creating a complex game using Phaser 3.
     ```
 
 ## Features
-
 - Made using [Phaser 3](https://phaser.io/phaser3).60
 - Read and render [Tiled](https://www.mapeditor.org/) tilemaps.
 - Breadth-First pathfinding.
@@ -27,15 +31,10 @@ This is my attempt of creating a complex game using Phaser 3.
 - Main menu, Save & Load features
 - Procedural map generation
 - Implementing A* pathfinding
-- Base building:
-    - Buildings
-    - Resource Collecting
-    - Zoning
-    - Farming
-- Logistic chains
-- 
+- Resource gathering
+- Buildings
+  
 ## Connections and Inspirations
-
 - [itch.io](https://itch.io)
 - [RexRainbow's notes and plugins](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/)
 - [Michael Westhadley's tutorials](https://medium.com/@michaelwesthadley) (medium.com)
@@ -46,6 +45,5 @@ This is my attempt of creating a complex game using Phaser 3.
 
 
 ## Credits
-
 - Art is by [Krishna Palacio](https://www.minifantasy.net/)
 - Font is by [howyoudoing](https://howyoudoing.itch.io/bookxel)
